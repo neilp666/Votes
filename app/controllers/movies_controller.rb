@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /movies
   # GET /movies.json
@@ -36,6 +36,18 @@ class MoviesController < ApplicationController
         format.json { render json: @movie.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  #upvote from user
+  #downvote from user
+  def upvote
+    @movie.upvote_from current_user
+    redirect_to movies_path
+  end
+ 
+  def downvote
+    @movie.downvote_from current_user
+    redirect_to movies_path
   end
 
   # PATCH/PUT /movies/1

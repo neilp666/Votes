@@ -2,7 +2,7 @@
 
 <%= link_to 'New Movie', new_movie_path %>
 
-<br>
+<hr>
 
     <% @movies.each do |movie| %>
     <div class="col-sm6 col-md-4">
@@ -12,12 +12,22 @@
     	<%= image_tag( movie.image, size: "250x300") %>
 
     	<div class="caption" style="text-align:center;">
-
+                <%= link_to like_movie_path(movie),  class: "like", method: :put do %>
+                   <button type="button" class="btn btn-info" aria-label="Left Align">
+                     <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                     <span class="badge"><%= movie.get_upvotes.size %></span>
+                   </button>
+                <% end %> 
+       
+       					<%= link_to unlike_movie_path(movie), class: "Unlike", method: :put do %>
+       					<button type="button" class="btn btn-info" aria-label="Left Align">
+                     <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+                     <span class="badge"><%= movie.get_upvotes.size %></span>
+                   </button>
+                <% end %> 
+               </div>
     	</div>
-
     </div>
-  </div>
-      
-    <% end %>
+<% end %>
 
 
